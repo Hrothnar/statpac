@@ -15,11 +15,17 @@ Get-ChildItem "$srcDir\*.cpp" | ForEach-Object {
     $objFile = "$buildDir\$fileName.o"
     
     # Compile the .cpp file into a .o file
-    g++ -g -std=c++23 -c $cppFile -o $objFile
+    g++ -std=c++23 -g -Wall -Wextra -pedantic -c $cppFile
+
+    # -g: Enables debugging features like source code, rows and etc.
+    # -Wall: Enables most compiler warnings.
+    # -Wextra: Enables extra warnings that are not included by -Wall.
+    # -pedantic: Enforces strict compliance with the C++ standard and issues warnings for any non-standard extensions.
+    # -std=c++23: Specifies the C++ standard version to use.
 }
 
 # Link all the .o files into a single executable
-g++ -g -std=c++23 "$buildDir\*.o" -o $outputExe
+g++ "$buildDir\*.o" -o $outputExe
 
 Write-Host "Build complete! Executable is located at: $outputExe"
 
