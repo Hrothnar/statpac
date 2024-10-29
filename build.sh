@@ -16,11 +16,17 @@ for cppFile in "$srcDir"/*.cpp; do
     objFile="$buildDir/$fileName.o"
     
     # Compile the .cpp file into a .o file
-    g++ -g -std=c++23 -c "$cppFile" -o "$objFile"
+    g++ -std=c++23 -g -Wall -Wextra -pedantic -c $cppFile -o $objFile
+    
+    # -g: Enables debugging features like source code, rows and etc.
+    # -Wall: Enables most compiler warnings.
+    # -Wextra: Enables extra warnings that are not included by -Wall.
+    # -pedantic: Enforces strict compliance with the C++ standard and issues warnings for any non-standard extensions.
+    # -std=c++23: Specifies the C++ standard version to use.
 done
 
 # Link all the .o files into a single executable
-g++ -g -std=c++23 "$buildDir"/*.o -o "$outputExe"
+g++ "$buildDir"/*.o -o "$outputExe"
 
 echo "Build complete! Executable is located at: $outputExe"
 
