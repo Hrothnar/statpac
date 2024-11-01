@@ -1,6 +1,7 @@
 #include <iostream>
+#include "print.h"
 
-void printPassedInt(int);
+// void printPassedInt(int);
 int macrosUse();
 
 int main() {
