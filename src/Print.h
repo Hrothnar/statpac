@@ -4,6 +4,8 @@
 void printPassedInt(int);
 void printPassedInt(int); // forward could be duplicated as they only declare the existence of a function
 void performStuff();
+void showSize();
+void doSomething();
 
 #endif
 

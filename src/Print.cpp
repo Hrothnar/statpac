@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdint> // for fast and least types
+
 #include "Print.h"
 
 // using namespace std;
@@ -35,5 +37,40 @@ void performStuff() {
 
     x = 65537; // 65537 is out of our range, so we get modulo wrap-around
     std::cout << "x is now: " << x << '\n';
+}
 
+void showSize() {
+	std::cout << "std 8:  " << sizeof(short) * 8 << " bits\n";
+	std::cout << "std 16: " << sizeof(int) * 8 << " bits\n";
+	std::cout << "std 32: " << sizeof(long) * 8 << " bits\n";
+	std::cout << '\n';
+	std::cout << "least 8:  " << sizeof(std::int_least8_t) * 8 << " bits\n";
+	std::cout << "least 16: " << sizeof(std::int_least16_t) * 8 << " bits\n";
+	std::cout << "least 32: " << sizeof(std::int_least32_t) * 8 << " bits\n";
+	std::cout << '\n';
+	std::cout << "fast 8:  " << sizeof(std::int_fast8_t) * 8 << " bits\n";
+	std::cout << "fast 16: " << sizeof(std::int_fast16_t) * 8 << " bits\n";
+	std::cout << "fast 32: " << sizeof(std::int_fast32_t) * 8 << " bits\n";
+}
+
+void doSomething() {
+	bool b = {false};
+	char c1 = {97};
+	char c2 = {'a'};
+	std::cout << std::boolalpha;
+	std::cout << "The boolean is: " << b << "\n";
+	std::cout << "The char is: " << c1 << "\n";
+	std::cout << "The char is: " << c2 << "\n";
+
+	std::cout << static_cast<int>(c2) << "\n";
+	
+	unsigned int u1 { 5 };
+    // Convert value of u1 to a signed int
+    int s1 { static_cast<int>(u1) };
+    std::cout << s1 << '\n'; // prints 5
+
+    int s2 { 5 };
+    // Convert value of s2 to an unsigned int
+    unsigned int u2 { static_cast<unsigned int>(s2) };
+    std::cout << u2 << '\n'; // prints 5
 }
