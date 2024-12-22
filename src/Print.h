@@ -6,6 +6,7 @@ void printPassedInt(int); // forward could be duplicated as they only declare th
 void performStuff();
 void showSize();
 void doSomething();
+void printFloatDetails(float);
 
 #endif
 
