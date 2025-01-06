@@ -7,6 +7,7 @@ void performStuff();
 void showSize();
 void doSomething();
 void printFloatDetails(float);
+void workWithCppString();
 
 #endif
 

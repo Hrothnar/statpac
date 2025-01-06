@@ -8,6 +8,15 @@ if (!(Test-Path -Path $buildDir)) {
     New-Item -Path $buildDir -ItemType Directory
 }
 
+# # Check if the build directory exists
+# if (Test-Path -Path $buildDir) {
+#     # Remove all files and subdirectories in the folder
+#     Get-ChildItem -Path $buildDir -Recurse | Remove-Item -Force -Recurse
+# } else {
+#     # Create the build directory if it doesn't exist
+#     New-Item -Path $buildDir -ItemType Directory
+# }
+
 # Compile each .cpp file in the src directory to an object file
 Get-ChildItem "$srcDir\*.cpp" | ForEach-Object {
     $fileName = $_.BaseName

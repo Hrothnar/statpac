@@ -8,12 +8,20 @@ int macrosUse() {
         std::cout << "Joe\n"; // will be compiled since PRINT_JOE is defined
     #endif
 
-    #ifdef PRINT_BOB // == #if defined(PRINT_BOB) (C++ style like)
+    #ifdef PRINT_BOB
         std::cout << "Bob 1\n"; // will be excluded since PRINT_BOB is not defined
     #endif
 
-    #ifndef PRINT_BOB // == #if !defined(PRINT_BOB) (C++ style like)
+    #if defined(PRINT_BOB)
+        std::cout << "Bob 1 (C++ like style)\n"; // will be excluded since PRINT_BOB is not defined
+    #endif
+
+    #ifndef PRINT_BOB
         std::cout << "Bob 2\n";
+    #endif
+
+    #if !defined(PRINT_BOB)
+        std::cout << "Bob 2 (C++ like style)\n";
     #endif
 
     #if 0 // Don't compile anything starting here

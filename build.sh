@@ -10,6 +10,15 @@ if [ ! -d "$buildDir" ]; then
     mkdir -p "$buildDir"
 fi
 
+# # Check if the build directory exists
+# if [ -d "$buildDir" ]; then
+#     # Remove all files and subdirectories in the folder
+#     rm -rf "$buildDir"/*
+# else
+#     # Create the build directory if it doesn't exist
+#     mkdir -p "$buildDir"
+# fi
+
 # Compile each .cpp file in the src directory to an object file
 for cppFile in "$srcDir"/*.cpp; do
     fileName=$(basename "$cppFile" .cpp)

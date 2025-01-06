@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstdint> // for fast and least types
+#include <string>
+#include <string_view>
 
 #include "Print.h"
 
@@ -13,7 +15,6 @@ void printPassedInt(int num) {
 	std::cout << num << "\n";
 	// cout << num << "\n";
 	std::cout << MACROS << "\n";
-
 }
 
 void performStuff() {
@@ -75,34 +76,60 @@ void doSomething() {
     std::cout << u2 << '\n'; // prints 5
 }
 
-#include <iostream>
-#include <iomanip>
-#include <bitset>
-#include <cmath> // For pow()
+void workWithCppString() {
+	std::string name {"Boris"};
+	std::cout << name + "\n";
+	name = "John";
+	std::cout << name + "\n";
 
-void printFloatDetails(float value) {
-    // Interpret the float as raw 32-bit data
-    uint32_t rawBits = *reinterpret_cast<uint32_t*>(&value);
+	std::cout << "This is an amazing code, don't you see that?\n";
 
-    // Extract components
-    uint32_t sign = (rawBits >> 31) & 0x1;                    // Extract sign bit
-    uint32_t exponent = (rawBits >> 23) & 0xFF;               // Extract 8-bit exponent
-    uint32_t mantissa = rawBits & 0x7FFFFF;                   // Extract 23-bit mantissa
+	// std::cout << "Enter your full name: ";
+	// std::string fullName {};
+	// std::getline(std::cin >> std::ws, fullName);
 
-    // Calculate the actual exponent (subtract bias)
-    int actualExponent = exponent - 127; // 127 is the bias for single precision floats
+	// std::cout << "Enter your favorite color : ";
+	// std::string color {};
+	// std::getline(std::cin >> std::ws, color);
 
-    // Display details
-    std::cout << "Float value: " << value << "\n";
-    std::cout << "Raw bits (hex): " << std::hex << rawBits << std::dec << "\n";
-    std::cout << "Raw bits (binary): " << std::bitset<32>(rawBits) << "\n";
-    std::cout << "Sign: " << sign << " (" << (sign == 0 ? "positive" : "negative") << ")\n";
-    std::cout << "Exponent (raw): " << exponent << "\n";
-    std::cout << "Exponent (actual): " << actualExponent << "\n";
-    std::cout << "Mantissa (raw): " << std::bitset<23>(mantissa) << "\n";
+	// std::cout << "Your name is: " << fullName << " and your favorite color is: " << color << "\n";
+	int length = { static_cast<int>(name.length())}; // length() returns an unsigned size_t
+	std::cout << name << " has " << length << " characters\n";
 
-    // Reconstruct the number using components
-    float reconstructedValue = pow(-1, sign) * (1.0f + (float)mantissa / (1 << 23)) * pow(2, actualExponent);
-    std::cout << "Reconstructed value: " << reconstructedValue << "\n";
-    std::cout << "---------------------------------------\n";
+	// std::ssize(name); // in C++20, you can also use the std::ssize() function to get the length of a std::string as a large signed integral type (usually std::ptrdiff_t):
+	int len { static_cast<int>(std::ssize(name)) };
+
+	using namespace std::string_literals;      // access the s suffix
+    using namespace std::string_view_literals; // access the sv suffix
+
+    std::cout << "foo\n";   // no suffix is a C-style string literal
+    std::cout << "goo\n"s;  // s suffix is a std::string literal
+    std::cout << "moo\n"sv; // sv suffix is a std::string_view literal
+
+	std::string s { "Hello, world!" }; // s makes a copy of its initializer
+
+	void printString(std::string);
+	void printSV(std::string_view);
+
+    printString(s);
+	printSV(s);
+	printSV("Hello World");
+
+	std::string_view sv{ "Hello, gorgeous!" };
+
+	// printString(sv);   // compile error: won't implicitly convert std::string_view to a std::string
+
+	std::string s { sv }; // okay: we can create std::string using std::string_view initializer
+	printString(s);      // and call the function with the std::string
+
+	printString(static_cast<std::string>(sv)); // okay: we can explicitly cast a std::string_view to a std::string
+
+}
+
+void printString(std::string str) { // str makes a copy of its initializer
+    std::cout << str << '\n';
+}
+
+void printSV(std::string_view str) { // now a std::string_view
+    std::cout << str << '\n';
 }
