@@ -119,10 +119,10 @@ void workWithCppString() {
 
 	// printString(sv);   // compile error: won't implicitly convert std::string_view to a std::string
 
-	std::string s { sv }; // okay: we can create std::string using std::string_view initializer
-	printString(s);      // and call the function with the std::string
+	// std::string s { sv }; // okay: we can create std::string using std::string_view initializer
+	// printString(s);      // and call the function with the std::string
 
-	printString(static_cast<std::string>(sv)); // okay: we can explicitly cast a std::string_view to a std::string
+	// printString(static_cast<std::string>(sv)); // okay: we can explicitly cast a std::string_view to a std::string
 
 }
 
@@ -132,4 +132,23 @@ void printString(std::string str) { // str makes a copy of its initializer
 
 void printSV(std::string_view str) { // now a std::string_view
     std::cout << str << '\n';
+}
+
+void modulo() {
+	std::cout << "Enter an integer: ";
+	int x{};
+	std::cin >> x;
+
+	std::cout << "Enter another integer: ";
+	int y{};
+	std::cin >> y;
+
+	std::cout << "The remainder is: " << x % y << '\n';
+
+	if (x % y == 0) {
+		std::cout << x << " is evenly divisible by " << y << '\n';
+	} else {
+		std::cout << x << " is not evenly divisible by " << y << '\n';
+	}
+
 }

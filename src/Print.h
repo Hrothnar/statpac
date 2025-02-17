@@ -8,6 +8,7 @@ void showSize();
 void doSomething();
 void printFloatDetails(float);
 void workWithCppString();
+void modulo();
 
 #endif
 

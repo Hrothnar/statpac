@@ -16,7 +16,8 @@ int main() {
     //     printFloatDetails(num);
     // }
 
-	workWithCppString();
+	// workWithCppString();
+	modulo();
 	
 	return 0;
 }
